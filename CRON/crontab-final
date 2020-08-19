@@ -1,0 +1,16 @@
+# /etc/crontab: system-wide crontab
+# HTOB test cycles
+# (AC input power from Variacs is controlled by auxilliary contactors - all Variacs start to supply at the same time!
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow user	command
+#17 *	* * *	root    cd / && run-parts --report /etc/cron.hourly
+#25 6	* * *	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+#47 6	* * 7	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+#52 6	1 * *	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+#
+# HTOB OUTPUT LOAD CONTACTOR (HTOB RASPBERRY RELAY BOARD, RELAY 1)
+0    * * * *   root echo HTOB_GUI_TEST__$(date +"\%Y-\%m-\%d_\%H:\%M:\%S") >> /home/pi/Documents/newHTOB/htob-test.txt;sudo python /home/pi/Documents/newHTOB/HTOB-Output-Load-Contactor-test.py >> /home/pi/Documents/newHTOB/htob-test-scripts.txt 2>&1
+#IMPORTANT: Last line - do not delete - MUST stay there
