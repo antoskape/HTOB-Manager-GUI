@@ -1,0 +1,6 @@
+# Ignored files
+# folder and everything inside it = folder/**
+__pycache__/**
+CRON/**
+log-files/**
+sources/**
